@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 def main():
-    st.sidebar.markdown("# ¡Bienvenido a la aplicación de Yamazumi Chart!")
+    st.sidebar.markdown("# Instrucciones")
     st.sidebar.markdown("Por favor sigue las instrucciones paso a paso para utilizar la herramienta correctamente.")
     # Pasos para el Yamazumi Chart
     st.sidebar.markdown("### Pasos:")
