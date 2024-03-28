@@ -4,6 +4,16 @@ import numpy as np
 import pandas as pd
 
 def main():
+    st.sidebar.write("¡Bienvenido a la aplicación de Yamazumi Chart!")
+    st.sidebar.markdown("Por favor sigue las instrucciones paso a paso para utilizar la herramienta correctamente.")
+    # Pasos para el Yamazumi Chart
+    st.sidebar.markdown("### Pasos:")
+    st.sidebar.markdown("- **Paso 1:** Ingresa el Tiempo Takt en minutos.")
+    st.sidebar.markdown("- **Paso 2:** Ingresa el número de estaciones de trabajo.")
+    st.sidebar.markdown("- **Paso 3:** Para cada estación de trabajo, ingresa el nombre y los tiempos de ciclo, inspección y espera.")
+    st.sidebar.markdown("- **Paso 4:** Observa el gráfico que muestra los tiempos por estación de trabajo.")
+    st.sidebar.markdown("- **Paso 5:** ¡Listo! Puedes ver los datos ingresados en la tabla debajo del gráfico.")
+
     st.image("Yamazumi.jpg", width=720)  
 
     st.sidebar.header("Yamazumi Chart")
