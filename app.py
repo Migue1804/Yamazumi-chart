@@ -1,17 +1,14 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 def main():
-    #st.title("Yamazumi Chart app")
-    # Agregar imagen sobre el título
-    st.image("Yamazumi.jpg", width=720)  # Reemplaza "ruta_de_la_imagen.jpg" con la ruta de tu imagen
+    st.image("Yamazumi.jpg", width=720)  
 
-    # Sección de Yamazumi Chart en la barra lateral
     st.sidebar.header("Yamazumi Chart")
 
-    # Ingresar el tiempo Takt manualmente
-    takt_time = st.sidebar.number_input("Ingrese el Tiempo Takt (minutos)", min_value=0.0, step=0.1, value=1.0)  # Cambiado el valor mínimo a 0.0
+    takt_time = st.sidebar.number_input("Ingrese el Tiempo Takt (minutos)", min_value=0.0, step=0.1, value=1.0)  
 
     num_workstations = st.sidebar.number_input('Número de Estaciones de Trabajo', min_value=0, step=1, value=1, format='%d')
 
@@ -22,7 +19,7 @@ def main():
     workstation_data = []
 
     for i in range(num_workstations):
-        st.sidebar.markdown(f"**Estación {i+1}**")  # Negritas y tamaño de letra aumentado
+        st.sidebar.markdown(f"**Estación {i+1}**")  
         operator_cycle_time = st.sidebar.number_input(f'Tiempo de Ciclo del Operador (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
         machine_cycle_time = st.sidebar.number_input(f'Tiempo de Ciclo de Máquina (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
         inspection_time = st.sidebar.number_input(f'Inspecciones (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
@@ -31,6 +28,10 @@ def main():
         workstation_data.append((operator_cycle_time, machine_cycle_time, inspection_time, wait_time))
 
     plot_yamazumi_chart(workstation_data, takt_time)
+
+    # Mostrar los datos ingresados en forma de tabla
+    df = pd.DataFrame(workstation_data, columns=['Tiempo de Ciclo del Operador', 'Tiempo de Ciclo de Máquina', 'Inspecciones', 'Esperas'])
+    st.write(df)
 
 def plot_yamazumi_chart(workstation_data, takt_time):
     labels = [f'Estación {i+1}' for i in range(len(workstation_data))]
