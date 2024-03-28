@@ -19,26 +19,27 @@ def main():
     workstation_data = []
 
     for i in range(num_workstations):
+        station_name = st.sidebar.text_input(f'Nombre de la Estación {i+1}')
         st.sidebar.markdown(f"**Estación {i+1}**")  
         operator_cycle_time = st.sidebar.number_input(f'Tiempo de Ciclo del Operador (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
         machine_cycle_time = st.sidebar.number_input(f'Tiempo de Ciclo de Máquina (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
         inspection_time = st.sidebar.number_input(f'Inspecciones (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
         wait_time = st.sidebar.number_input(f'Esperas (min) - Estación {i+1}', min_value=0.0, step=0.1, value=0.0)
         
-        workstation_data.append((operator_cycle_time, machine_cycle_time, inspection_time, wait_time))
+        workstation_data.append((station_name, operator_cycle_time, machine_cycle_time, inspection_time, wait_time))
 
     plot_yamazumi_chart(workstation_data, takt_time)
 
     # Mostrar los datos ingresados en forma de tabla
-    df = pd.DataFrame(workstation_data, columns=['Tiempo de Ciclo del Operador', 'Tiempo de Ciclo de Máquina', 'Inspecciones', 'Esperas'])
+    df = pd.DataFrame(workstation_data, columns=['Nombre de la Estación', 'Tiempo de Ciclo del Operador', 'Tiempo de Ciclo de Máquina', 'Inspecciones', 'Esperas'])
     st.write(df)
 
 def plot_yamazumi_chart(workstation_data, takt_time):
-    labels = [f'Estación {i+1}' for i in range(len(workstation_data))]
-    operator_cycle_times = [data[0] for data in workstation_data]
-    machine_cycle_times = [data[1] for data in workstation_data]
-    inspection_times = [data[2] for data in workstation_data]
-    wait_times = [data[3] for data in workstation_data]
+    labels = [data[0] for data in workstation_data]
+    operator_cycle_times = [data[1] for data in workstation_data]
+    machine_cycle_times = [data[2] for data in workstation_data]
+    inspection_times = [data[3] for data in workstation_data]
+    wait_times = [data[4] for data in workstation_data]
 
     fig, ax = plt.subplots(figsize=(10, 6))
 
